@@ -1,3 +1,24 @@
+<section class="section-header_collection" data-section-id="{{ section.id }}">
+  <div class="wrapper">
+    <div class="section-header_collection-filter">
+      <ul class="section-header_collection-ul">
+        {% for block in section_blocks %}
+          <li class="section-header_collection-li" data-id="{{ block.settings.collection }}">
+            {{ block.settings.collection | capitalize }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="section-header_collection-list_producstios">
+      {% for block in section.blocks %}
+        <div class="section-header_collection-list-producs-row" data-id="{{ block.settings.collection }}">
+          {% for product in collections[block.settings.collection].producsts limit: 5 %}{% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 {% schema %}
   {
     "name": "Header Collection",
