@@ -368,7 +368,7 @@
 
         {% if linklists[section.settings.main_linklist].links.size < 6 %}
         <nav class="small--hide " id="AccessibleNav" role="navigation">
-          {% include 'site-nav' %}
+          {% include 'collection-nav-product-list' %}
         </nav>
         {% endif %}
         {% unless linklists[section.settings.main_linklist] == blank %}
@@ -490,7 +490,7 @@
           {% if section.settings.align_logo == 'left' %}
           {% if linklists[section.settings.main_linklist].links.size < 6 %}
           <nav class="grid__item medium-up--seven-twelfths small--hide" id="AccessibleNav" role="navigation">
-            {% include 'site-nav' %}
+            {% include 'collection-nav-product-list' %}
           </nav>
           {% else %}
           <div class="grid__item medium-up--seven-twelfths mobile_div_hide small--hide">&nbsp;</div>
@@ -542,7 +542,7 @@
                 <span class="commom_colord" id="CartCost">{{ cart.total_price | money }}</span>
               </a>
               {% endunless %}
-            </div>
+            </div> 
 
           </div>
           </div>
@@ -551,7 +551,7 @@
       <div class="site-header link_list_bottom border-bottom {% if section.settings.align_logo == 'left' %} logo--left {% else %} logo--center{% endif %}" role="banner">
         <div class="grid grid--no-gutters">
           <nav class="grid__item medium-up--one-whole small--hide" id="AccessibleNav" role="navigation">
-            {% include 'site-nav' %}
+            {% include 'collection-nav-product-list' %}
           </nav>
         </div>
       </div>
@@ -577,6 +577,7 @@
 {% schema %}
 {
   "name": "Header",
+  "max_blocks": 6,
   "settings": [
     {
       "type": "header",
@@ -779,17 +780,19 @@
   ],
   "blocks": [
     {
-      "type": "mega_menu",
-      "name": "Mega menu",
-      "settings": [
-        {
-          "type": "text",
-          "id": "navigation_mega_menu",
-          "label": "Menu item",
-          "info": "Enter menu item to apply a mega menu dropdown. This menu has limited support for dropdown items."
-        }
-      ]
-    }
+        "type": "collections",
+        "name": {
+          "pt-BR": "Coleção",
+          "en": "Collection"
+        },
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Coleção"
+          }
+        ]
+      }
   ]
 }
 {% endschema %}
