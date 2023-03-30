@@ -1,34 +1,4 @@
-{% schema %}
-    {
-      "name": "Image Slider",
-      "blocks": [
-        {
-          "type": "desktop_image",
-          "name": "Desktop Image",
-          "settings": [
-            {
-              "type": "image_picker",
-              "id": "desktop_image",
-              "label": "Desktop Image"
-            }
-          ]
-        },
-        {
-          "type": "mobile_image",
-          "name": "Mobile Image",
-          "settings": [
-            {
-              "type": "image_picker",
-              "id": "mobile_image",
-              "label": "Mobile Image"
-            }
-          ]
-        }
-      ]
-    }
-    {% endschema %}
-    
-    {% stylesheet %}
+<style>
     /* Estilos para o Image Slider */
     .image-slider {
       position: relative;
@@ -69,9 +39,8 @@
         display: block;
       }
     }
-    {% endstylesheet %}
-    
-    {% javascript %}
+</style>
+<script>
     /* Javascript para o Image Slider */
     $(document).ready(function() {
       var images = $('.image-slider img');
@@ -86,12 +55,12 @@
         $(images[i]).addClass('active');
       }, 5000);
     });
-    {% endjavascript %}
+</script>
     
-    {% assign desktop_images = section.blocks | where: 'type', 'desktop_image' %}
-    {% assign mobile_images = section.blocks | where: 'type', 'mobile_image' %}
+{% assign desktop_images = section.blocks | where: 'type', 'desktop_image' %}
+{% assign mobile_images = section.blocks | where: 'type', 'mobile_image' %}
     
-    <div class="image-slider">
+<section class="image-slider">
       {% for desktop_image in desktop_images %}
         <div class="desktop-image">
           <img src="{{ desktop_image.settings.desktop_image | img_url }}" alt="Desktop Image">
@@ -103,5 +72,42 @@
           <img src="{{ mobile_image.settings.mobile_image | img_url }}" alt="Mobile Image">
         </div>
       {% endfor %}
-    </div>
-    
+</section>
+
+{% schema %}
+        {
+          "name": "Banner",
+          "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "titulo",
+            "default": "Banner"
+          }
+        ],
+          "blocks": [
+            {
+              "type": "desktop_image",
+              "name": "Desktop Image",
+              "settings": [
+                {
+                  "type": "image_picker",
+                  "id": "desktop_image",
+                  "label": "Desktop Image"
+                }
+              ]
+            },
+            {
+              "type": "mobile_image",
+              "name": "Mobile Image",
+              "settings": [
+                {
+                  "type": "image_picker",
+                  "id": "mobile_image",
+                  "label": "Mobile Image"
+                }
+              ]
+            }
+          ]
+        }
+{% endschema %}
