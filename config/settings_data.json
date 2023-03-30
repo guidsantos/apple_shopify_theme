@@ -546,12 +546,26 @@
             "settings": {
               "desktop_image": "shopify:\/\/shop_images\/N.png"
             }
+          },
+          "3fee8fc8-9e2e-4386-a06b-5d1435502b9d": {
+            "type": "mobile_image",
+            "settings": {
+              "mobile_image": "shopify:\/\/shop_images\/apple_space.jpg"
+            }
+          },
+          "9ac7d117-a6c5-46e1-b2f3-a9bcd78b5645": {
+            "type": "mobile_image",
+            "settings": {
+              "mobile_image": "shopify:\/\/shop_images\/iphone_banner.jpg"
+            }
           }
         },
         "block_order": [
           "5a1c7d00-241d-4044-9812-150602a0d1cd",
           "5aedaa2c-740e-4f87-93c8-5ff2902d1bbd",
-          "f0907380-d729-4af7-ab1b-420abcab1873"
+          "f0907380-d729-4af7-ab1b-420abcab1873",
+          "3fee8fc8-9e2e-4386-a06b-5d1435502b9d",
+          "9ac7d117-a6c5-46e1-b2f3-a9bcd78b5645"
         ],
         "settings": {
         }
