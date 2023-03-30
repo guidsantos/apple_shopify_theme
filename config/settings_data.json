@@ -590,9 +590,34 @@
           "transparent_btn": true,
           "mobile_grid": "on_mobile_set_row_two"
         }
+      },
+      "6c48b102-b66c-4b1a-9f2a-a6d1f7551511": {
+        "type": "header_collection",
+        "blocks": {
+          "81c110fe-b73a-4e07-a7a8-020e90ebe4df": {
+            "type": "collections",
+            "settings": {
+              "collection": "celular"
+            }
+          },
+          "819496f0-f769-4f17-ba6f-15221bf485ab": {
+            "type": "collections",
+            "settings": {
+              "collection": "smart-watch"
+            }
+          }
+        },
+        "block_order": [
+          "81c110fe-b73a-4e07-a7a8-020e90ebe4df",
+          "819496f0-f769-4f17-ba6f-15221bf485ab"
+        ],
+        "settings": {
+          "title": "Header Collection"
+        }
       }
     },
     "content_for_index": [
+      "6c48b102-b66c-4b1a-9f2a-a6d1f7551511",
       "1573520799384",
       "1557953325140",
       "1577034702140",
