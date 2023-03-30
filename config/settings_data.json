@@ -528,6 +528,22 @@
       },
       "1573520799384": {
         "type": "slideshow",
+        "blocks": {
+          "40db65f2-cf3b-4e40-94c3-6d9773f622dd": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/29296707-f927-40d6-8b20-4543d611d1e6.jpg",
+              "alignment": "top",
+              "title": "",
+              "subheading": "",
+              "button_label": "",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "40db65f2-cf3b-4e40-94c3-6d9773f622dd"
+        ],
         "settings": {
           "autoplay": true,
           "autoplay_speed": "5000",
