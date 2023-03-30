@@ -1,0 +1,107 @@
+{% schema %}
+    {
+      "name": "Image Slider",
+      "blocks": [
+        {
+          "type": "desktop_image",
+          "name": "Desktop Image",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "desktop_image",
+              "label": "Desktop Image"
+            }
+          ]
+        },
+        {
+          "type": "mobile_image",
+          "name": "Mobile Image",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "mobile_image",
+              "label": "Mobile Image"
+            }
+          ]
+        }
+      ]
+    }
+    {% endschema %}
+    
+    {% stylesheet %}
+    /* Estilos para o Image Slider */
+    .image-slider {
+      position: relative;
+    }
+    
+    .image-slider img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    
+    .image-slider img.active {
+      opacity: 1;
+    }
+    
+    @media only screen and (max-width: 767px) {
+      /* Estilos para dispositivos móveis */
+      .image-slider .desktop-image {
+        display: none;
+      }
+      
+      .image-slider .mobile-image {
+        display: block;
+      }
+    }
+    
+    @media only screen and (min-width: 768px) {
+      /* Estilos para desktops */
+      .image-slider .mobile-image {
+        display: none;
+      }
+      
+      .image-slider .desktop-image {
+        display: block;
+      }
+    }
+    {% endstylesheet %}
+    
+    {% javascript %}
+    /* Javascript para o Image Slider */
+    $(document).ready(function() {
+      var images = $('.image-slider img');
+      var i = 0;
+    
+      setInterval(function() {
+        $(images[i]).removeClass('active');
+        i++;
+        if (i >= images.length) {
+          i = 0;
+        }
+        $(images[i]).addClass('active');
+      }, 5000);
+    });
+    {% endjavascript %}
+    
+    {% assign desktop_images = section.blocks | where: 'type', 'desktop_image' %}
+    {% assign mobile_images = section.blocks | where: 'type', 'mobile_image' %}
+    
+    <div class="image-slider">
+      {% for desktop_image in desktop_images %}
+        <div class="desktop-image">
+          <img src="{{ desktop_image.settings.desktop_image | img_url }}" alt="Desktop Image">
+        </div>
+      {% endfor %}
+      
+      {% for mobile_image in mobile_images %}
+        <div class="mobile-image">
+          <img src="{{ mobile_image.settings.mobile_image | img_url }}" alt="Mobile Image">
+        </div>
+      {% endfor %}
+    </div>
+    
