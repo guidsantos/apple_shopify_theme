@@ -42,7 +42,7 @@
 
   /* Adicione a classe ao novo elemento <div> */
   .section-header_collection-list-product {
-    display: flex;
+    display: none;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
@@ -62,6 +62,10 @@
     max-width: 5rem;
     height: auto;
   }
+
+  .section-header_collection-product_card_link {
+    text-decoration: none;
+  }
 </style>
 
 <section class="section-header_collection" data-section-id="{{ section.id }}">
@@ -77,10 +81,12 @@
     {% for block in section.blocks %}
       <div class="section-header_collection-list-product" data-id="{{ block.settings.collection }}">
         {% for product in collections[block.settings.collection].products limit: 5 %}
-          <div class="section-header_collection-list-product_card">
-            <img src="{{ product.images[0] | img_url }}" alt="{{ product.featured_image.alt }}">
-            <a href="{{ product.url }}">{{ product.title }}</a>
-          </div>
+          <a href="{{ product.url }}" class="section-header_collection-product_card_link">
+            <div class="section-header_collection-list-product_card">
+              <img src="{{ product.images[0] | img_url }}" alt="{{ product.featured_image.alt }}">
+              <p>{{ product.title }}</p>
+            </div>
+          </a>
         {% endfor %}
       </div>
     {% endfor %}
@@ -91,7 +97,7 @@
   const productDropdowns = document.querySelectorAll('.section-header_collection-list-product');
 
   document.querySelectorAll('.section-header_collection-li').forEach(li => {
-    li.addEventListener('click', () => {
+    li.addEventListener('mouseover', () => {
       const id = li.dataset.id;
       productDropdowns.forEach(dropdown => {
         if (dropdown.dataset.id === id) {
