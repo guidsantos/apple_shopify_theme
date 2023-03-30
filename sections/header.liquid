@@ -542,7 +542,7 @@
                 <span class="commom_colord" id="CartCost">{{ cart.total_price | money }}</span>
               </a>
               {% endunless %}
-            </div> 
+            </div>
 
           </div>
           </div>
@@ -779,19 +779,17 @@
   ],
   "blocks": [
     {
-        "type": "collections",
-        "name": {
-          "pt-BR": "Coleção",
-          "en": "Collection"
-        },
-        "settings": [
-          {
-            "type": "collection",
-            "id": "collection",
-            "label": "Coleção"
-          }
-        ]
-      }
+      "type": "mega_menu",
+      "name": "Mega menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "navigation_mega_menu",
+          "label": "Menu item",
+          "info": "Enter menu item to apply a mega menu dropdown. This menu has limited support for dropdown items."
+        }
+      ]
+    }
   ]
 }
 {% endschema %}
