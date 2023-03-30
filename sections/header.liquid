@@ -368,7 +368,7 @@
 
         {% if linklists[section.settings.main_linklist].links.size < 6 %}
         <nav class="small--hide " id="AccessibleNav" role="navigation">
-          {% include 'collection-nav-product-list' %}
+          {% include 'site-nav' %}
         </nav>
         {% endif %}
         {% unless linklists[section.settings.main_linklist] == blank %}
@@ -463,7 +463,7 @@
                 <img src="{{ section.settings.logo_mobile | img_url: image_size }}"
                      srcset="{{ section.settings.logo_mobile | img_url: image_size }} 1x, {{ section.settings.logo_mobile | img_url: image_size, scale: 2 }} 2x"
                      alt="{{ section.settings.logo_mobile.alt | default: shop.name }}"
-                     itemprop="logo"
+                     itemprop="logo" 
                      >
               </noscript>
             </a>
@@ -490,7 +490,7 @@
           {% if section.settings.align_logo == 'left' %}
           {% if linklists[section.settings.main_linklist].links.size < 6 %}
           <nav class="grid__item medium-up--seven-twelfths small--hide" id="AccessibleNav" role="navigation">
-            {% include 'collection-nav-product-list' %}
+            {% include 'site-nav' %}
           </nav>
           {% else %}
           <div class="grid__item medium-up--seven-twelfths mobile_div_hide small--hide">&nbsp;</div>
@@ -551,7 +551,7 @@
       <div class="site-header link_list_bottom border-bottom {% if section.settings.align_logo == 'left' %} logo--left {% else %} logo--center{% endif %}" role="banner">
         <div class="grid grid--no-gutters">
           <nav class="grid__item medium-up--one-whole small--hide" id="AccessibleNav" role="navigation">
-            {% include 'collection-nav-product-list' %}
+            {% include 'site-nav' %}
           </nav>
         </div>
       </div>

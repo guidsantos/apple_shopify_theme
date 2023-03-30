@@ -1,167 +1,118 @@
-<ul class="site-nav list--inline {{ nav_alignment }}" id="SiteNav">
-  {% for link in linklists[section.settings.main_linklist].links %}
-    {%- assign child_list_handle = link.title | handleize -%}
+<style>
+  .section-header_collection-wrapper {
+    position: relative;
+  }
 
-    {%- assign mega_nav_names = '' -%}
+  .section-header_collection-ul {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'mega_menu' -%}
-        {%- assign mega_nav_names = mega_nav_names | append: block.settings.navigation_mega_menu | append: ',' -%}
-      {%- endif -%}
-    {%- endfor -%}
+  .section-header_collection-li {
+    margin: 2rem;
+    display: block;
+    position: relative;
+  }
 
-    {%- assign mega_nav_names = mega_nav_names | downcase | split: ',' | compact -%}
+  .section-header_collection-li a {
+    text-decoration: none;
+  }
 
-    {% if link.links != blank %}
-      {%- assign downcased_link_title = link.title | downcase -%}
-      <li
-        class="site-nav--has-dropdown {% if mega_nav_names contains downcased_link_title %} site-nav--has-centered-dropdown {% else %}count_li {% endif %}{% if link.active %} site-nav--active{% endif %}"
-        aria-haspopup="true"
-        aria-controls="SiteNavLabel-{{ child_list_handle }}">
-        <a
-          href="{{ link.url }}"
-          class="site-nav__link site-nav__link--main"
-          {% if link.active %}
-          aria-current="page"
-          {% endif %}
-          aria-expanded="false"
-          data-dropdown-rel="{{ link.handle }}">
-          {{ link.title }}
-          {% include 'icon-chevron-down' %}
-        </a>
+  .section-header_collection-product-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    min-width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    height: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
 
-        <div
-          class="site-nav__dropdown{% if mega_nav_names contains downcased_link_title %} site-nav__dropdown--centered{% endif %}"
-          id="SiteNavLabel-{{ child_list_handle }}"
-          data-dropdown="{{ link.handle }}">
-          {% if mega_nav_names contains downcased_link_title %}
-            <div class="site-nav__childlist">
-              <ul class="site-nav__childlist-grid">
-                {% if link.links != blank %}
+  .section-header_collection-li:hover {
+    text-decoration: underline;
+  }
 
-                  {% for childlink in link.links limit: 5 %}
-                    {% assign collection = childlink.object %}
-                    <li class="site-nav__childlist-item count-column {% if childlink.links != blank %} left {% elsif collection.image or collection.products.first or childlink.type == 'product_link' %}center {% endif %}">
-                      {% if childlink.links != blank %}
-                        <a
-                          href="{{ childlink.url }}"
-                          class="site-nav__link site-nav__child-link site-nav__child-link--parent"
-                          {% if childlink.active %}
-                          aria-current="page"
-                          {% endif %}>
-                          {{ childlink.title | escape }}
-                        </a>
-                      {% else %}
-                        <a
-                          href="{{ childlink.url }}"
-                          class="{% if collection.image or collection.products.first or childlink.type == 'product_link' %}hide {% endif %}site-nav__link site-nav__child-link site-nav__child-link--parent"
-                          {% if childlink.active %}
-                          aria-current="page"
-                          {% endif %}>
-                          {{ childlink.title | escape }} AOOOBA
-                        </a>
-                      {% endif %}
-                      {% if childlink.links != blank %}
-                        <ul>
-                          {% for grandchildlink in childlink.links %}
-                            <li>
-                              <a
-                                href="{{ grandchildlink.url }}"
-                                class="site-nav__link site-nav__child-link"
-                                {% if grandchildlink.active %}
-                                aria-current="page"
-                                {% endif %}>
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {% endfor %}
-                        </ul>
-                      {% else %}
-                        {% assign collection = childlink.object %}
-                        {% if childlink.type == 'collection_link' %}
-                          <div class="coll_image">
-                            <a class="collection-link-menu" href="{{ childlink.url }}">
-                              <div class="collection-grid-item__overlay">
-                                {% if collection.image %}
-                                  <img src="{{ collection | img_url: '500x' }}" alt="{{ collection.title | escape }}" />
-                                {% else %}
-                                  <img src="{{ collection.products.first | img_url: '500x' }}" alt="{{ collection.title | escape }}" />
-                                {% endif %}
-                              </div>
-                              <div class="collection-grid-item__title-wrapper">
-                                <h3 class="collection-grid-item__title">
-                                  {{ childlink.title }}
-                                </h3>
-                                {% if settings.show_view_all %}
-                                  <div class="text-center coll_all">
-                                    <span class="btn_all btn">{{ settings.btn_text }}</span>
-                                  </div>
-                                {% endif %}
-                              </div>
-                            </a>
-                          </div>
-                        {% endif %}
-                        {% assign product = childlink.object %}
-                        {% if childlink.type == 'product_link' %}
-                          <div class="grid__item--collection-template">
-                            {% include 'product-card-grid', product: product, image_pro: 'grande' %}
-                          </div>
-                        {% endif %}
-                      {% endif %}
+  /* Adicione a classe ao novo elemento <div> */
+  .section-header_collection-list-product {
+    display: none;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
 
-                    </li>
-                  {% endfor %}
+  .section-header_collection-list-product_card {
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    width: 5rem;
+    margin: 1rem;
+    background-color: #fff;
+  }
 
-                {% endif %}
-              </ul>
+  .section-header_collection-list-product_card img {
+    max-width: 5rem;
+    height: auto;
+  }
+
+  .section-header_collection-product_card_link {
+    text-decoration: none;
+  }
+</style>
+
+<section class="section-header_collection" data-section-id="{{ section.id }}">
+  <div class="section-header_collection-wrapper">
+    <ul class="section-header_collection-ul">
+      {% for block in section.blocks %}
+        <li class="section-header_collection-li" data-id="{{ block.settings.collection }}">
+          <a href="#">{{ block.settings.collection | capitalize }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% for block in section.blocks %}
+      <div class="section-header_collection-list-product" data-id="{{ block.settings.collection }}">
+        {% for product in collections[block.settings.collection].products limit: 5 %}
+          <a href="{{ product.url }}" class="section-header_collection-product_card_link">
+            <div class="section-header_collection-list-product_card">
+              <img src="{{ product.images[0] | img_url }}" alt="{{ product.featured_image.alt }}">
+              <p>{{ product.title }}</p>
             </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
 
-          {% else %}
-            <ul>
-              {% for childlink in link.links %}
-                <li class="{% if childlink.active %}site-nav--active {% endif %}{% if childlink.links != blank %} site_nav-has-dropdown{% endif %}">
-                  <a
-                    href="{{ childlink.url }}"
-                    class="site-nav__link site-nav__child-link{% if forloop.last %} site-nav__link--last{% endif %}"
-                    {% if childlink.active %}
-                    aria-current="page"
-                    {% endif %}>
-                    {{ childlink.title | escape }}
-                    {% if childlink.links != blank %}
-                      {% include 'icon-chevron-down' %}{% endif %}
-                  </a>
-                  {% if childlink.links != blank %}
-                    <ul class="drop_down_nav">
-                      {% for grandchildlink in childlink.links %}
-                        <li>
-                          <a
-                            href="{{ grandchildlink.url }}"
-                            class="site-nav__link site-nav__child-link"
-                            {% if grandchildlink.active %}
-                            aria-current="page"
-                            {% endif %}>
-                            {{ grandchildlink.title | escape }}
-                          </a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
-      </li>
-    {% else %}
-      <li {% if link.active %}class="site-nav--active"{% endif %}>
-        <a
-          href="{{ link.url }}"
-          class="site-nav__link site-nav__link--main"
-          {% if link.active %}
-          aria-current="page"
-          {% endif %}>{{ link.title }}</a>
-      </li>
-    {% endif %}
-  {% endfor %}
+<script>
+  const productDropdowns = document.querySelectorAll('.section-header_collection-list-product');
 
-</ul>
+  document.querySelectorAll('.section-header_collection-li').forEach(li => {
+    li.addEventListener('mouseover', () => {
+      const id = li.dataset.id;
+      productDropdowns.forEach(dropdown => {
+        if (dropdown.dataset.id === id) {
+          dropdown.style.display = 'flex';
+        } else {
+          dropdown.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  productDropdowns.forEach(dropdown => {
+    const li = dropdown.parentNode;
+    li.addEventListener('mouseleave', () => {
+      dropdown.style.display = 'none';
+    });
+  });
+</script>
