@@ -528,46 +528,6 @@
       },
       "1573520799384": {
         "type": "slideshow",
-        "blocks": {
-          "7d30c574-9de5-4dc4-ad51-d17221498663": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/29296707-f927-40d6-8b20-4543d611d1e6.jpg",
-              "alignment": "top",
-              "title": "",
-              "subheading": "",
-              "button_label": "",
-              "link": ""
-            }
-          },
-          "1573520799384-0": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/58d4c024-2c71-45cc-ae36-43a3b767deb3.jpg",
-              "alignment": "center",
-              "title": "",
-              "subheading": "",
-              "button_label": "",
-              "link": "shopify:\/\/collections\/celular"
-            }
-          },
-          "1576511885136": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/N.png",
-              "alignment": "top",
-              "title": "",
-              "subheading": "",
-              "button_label": "",
-              "link": "shopify:\/\/products\/iwo-8-lite"
-            }
-          }
-        },
-        "block_order": [
-          "7d30c574-9de5-4dc4-ad51-d17221498663",
-          "1573520799384-0",
-          "1576511885136"
-        ],
         "settings": {
           "autoplay": true,
           "autoplay_speed": "5000",
