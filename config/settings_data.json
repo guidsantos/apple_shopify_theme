@@ -238,17 +238,6 @@
     "sections": {
       "header": {
         "type": "header",
-        "blocks": {
-          "1536139291068": {
-            "type": "mega_menu",
-            "settings": {
-              "navigation_mega_menu": "clothes"
-            }
-          }
-        },
-        "block_order": [
-          "1536139291068"
-        ],
         "settings": {
           "remove_space": true,
           "align_logo": "left",
