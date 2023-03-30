@@ -1,4 +1,4 @@
-{% stylesheet %}
+<style>
   /* Estilos para o Image Slider */
   .image-slider {
     position: relative;
@@ -39,10 +39,9 @@
       display: block;
     }
   }
-  {% endstylesheet %}
+</style>
   
-  {% javascript %}
-  /* Javascript para o Image Slider */
+<script>
   $(document).ready(function() {
     var images = $('.image-slider img');
     var i = 0;
@@ -56,24 +55,32 @@
       $(images[i]).addClass('active');
     }, 5000);
   });
-  {% endjavascript %}
+</script>
   
   {% assign desktop_images = section.blocks | where: 'type', 'desktop_image' %}
   {% assign mobile_images = section.blocks | where: 'type', 'mobile_image' %}
   
-  <section class="image-slider">
-    {% for desktop_image in desktop_images %}
-      <div class="desktop-image">
-        <img src="{{ desktop_image.settings.desktop_image | img_url }}" alt="Desktop Image">
-      </div>
-    {% endfor %}
-    
-    {% for mobile_image in mobile_images %}
-      <div class="mobile-image">
-        <img src="{{ mobile_image.settings.mobile_image | img_url }}" alt="Mobile Image">
-      </div>
-    {% endfor %}
-  </section>
+<section class="image-slider">
+  {% for desktop_block in desktop_blocks %}
+    <div class="desktop-image">
+      {% for image in desktop_block.settings %}
+        {% if image.desktop_image != blank %}
+          <img src="{{ image.desktop_image | img_url }}" alt="Desktop Image">
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+  
+  {% for mobile_block in mobile_blocks %}
+    <div class="mobile-image">
+      {% for image in mobile_block.settings %}
+        {% if image.mobile_image != blank %}
+          <img src="{{ image.mobile_image | img_url }}" alt="Mobile Image">
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+</section>
 
 {% schema %}
     {
