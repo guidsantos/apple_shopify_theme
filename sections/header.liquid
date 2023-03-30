@@ -56,7 +56,7 @@
         {% if link.links != blank %}
         {% capture child_list_handle %}{{ link.handle }}-{{ outerLoopIndex }}{% endcapture %}
         <button type="button" class="btn--link js-toggle-submenu mobile-nav__link" data-target="{{ child_list_handle }}" data-level="1">
-         {{ link.title }} 
+          {{ link.title }}
           <div class="mobile-nav__icon">
             {% include 'icon-chevron-right' %}
             <span class="icon__fallback-text">{{ 'layout.navigation.expand' | t }}</span>
@@ -463,7 +463,7 @@
                 <img src="{{ section.settings.logo_mobile | img_url: image_size }}"
                      srcset="{{ section.settings.logo_mobile | img_url: image_size }} 1x, {{ section.settings.logo_mobile | img_url: image_size, scale: 2 }} 2x"
                      alt="{{ section.settings.logo_mobile.alt | default: shop.name }}"
-                     itemprop="logo" 
+                     itemprop="logo"
                      >
               </noscript>
             </a>
@@ -526,6 +526,15 @@
               {% endif %}
               {% endif %}
 
+              {% if settings.show_multiple_currencies %}
+              <div class="currency-picker__wrapper small--hide" id="desktop_currency">
+                {% if settings.select_dropdown == 'selected_currency' %}
+                {% include 'currency-picker' %}
+                {% else %}
+                {% include 'auto_currency' %}
+                {% endif %}
+              </div>
+              {% endif %}
               {% unless section.settings.disable_cart %}
 
               <a href="/cart" class="site-header__cart head_cart">
@@ -571,6 +580,13 @@
          <span class="h_msg_text"> {{ section.settings.header_strip_text_link_name }}</span>
       </div>
       {% endunless %}
+  {% comment %}
+  {% if section.settings.align_logo == 'center' %}
+  <!--   <nav class="small--hide border-bottom" id="AccessibleNav" role="navigation">
+{% include 'site-nav', nav_alignment: 'site-nav--centered' %}
+</nav> -->
+  {% endif %}
+  {% endcomment %}
 
 </div>
 
@@ -778,20 +794,18 @@
     }
   ],
   "blocks": [
-      {
-        "type": "collections",
-        "name": {
-          "pt-BR": "Coleção",
-          "en": "Collection"
-        },
-        "settings": [
-          {
-            "type": "collection",
-            "id": "collection",
-            "label": "Coleção"
-          }
-        ]
-      }
-    ]
+    {
+      "type": "mega_menu",
+      "name": "Mega menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "navigation_mega_menu",
+          "label": "Menu item",
+          "info": "Enter menu item to apply a mega menu dropdown. This menu has limited support for dropdown items."
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
