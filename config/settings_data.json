@@ -238,24 +238,8 @@
     "sections": {
       "header": {
         "type": "header",
-        "blocks": {
-          "d3386df4-de4c-4267-bf83-2dfccfaf03f4": {
-            "type": "collections",
-            "settings": {
-              "collection": "celular"
-            }
-          },
-          "25b12926-9b92-48de-94bd-d5651d6362d2": {
-            "type": "collections",
-            "settings": {
-              "collection": "smart-watch"
-            }
-          }
-        },
-        "block_order": [
-          "d3386df4-de4c-4267-bf83-2dfccfaf03f4",
-          "25b12926-9b92-48de-94bd-d5651d6362d2"
-        ],
+        "blocks": {},
+        "block_order": [],
         "settings": {
           "remove_space": true,
           "align_logo": "left",
