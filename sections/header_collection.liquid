@@ -40,7 +40,8 @@
     text-decoration: underline;
   }
 
-  .section-header_collection-li:hover .section-header_collection-product-dropdown {
+  /* Adicione a classe ao novo elemento <div> */
+  .section-header_collection-list-product {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -68,20 +69,48 @@
     <ul class="section-header_collection-ul">
       {% for block in section.blocks %}
         <li class="section-header_collection-li" data-id="{{ block.settings.collection }}">
-          <a href="{{ block.settings.collection.url }}">{{ block.settings.collection | capitalize }}</a>
-          <div class="section-header_collection-product-dropdown">
-            {% for product in collections[block.settings.collection].products limit: 5 %}
-              <div class="section-header_collection-list-product_card">
-                <img src="{{ product.url | img_url }}" alt="{{ product.featured_image.alt }}">
-                <a href="{{ product.url }}">{{ product.title }}</a>
-              </div>
-            {% endfor %}
-          </div>
+          <a href="#">{{ block.settings.collection | capitalize }}</a>
         </li>
       {% endfor %}
     </ul>
+
+    {% for block in section.blocks %}
+      <div class="section-header_collection-list-product" data-id="{{ block.settings.collection }}">
+        {% for product in collections[block.settings.collection].products limit: 5 %}
+          <div class="section-header_collection-list-product_card">
+            <img src="{{ product.url | img_url }}" alt="{{ product.featured_image.alt }}">
+            <a href="{{ product.url }}">{{ product.title }}</a>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
   </div>
 </section>
+
+<script>
+  const productDropdowns = document.querySelectorAll('.section-header_collection-list-product');
+
+  document.querySelectorAll('.section-header_collection-li').forEach(li => {
+    li.addEventListener('click', () => {
+      const id = li.dataset.id;
+      productDropdowns.forEach(dropdown => {
+        if (dropdown.dataset.id === id) {
+          dropdown.style.display = 'flex';
+        } else {
+          dropdown.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  productDropdowns.forEach(dropdown => {
+    const li = dropdown.parentNode;
+    li.addEventListener('mouseleave', () => {
+      dropdown.style.display = 'none';
+    });
+  });
+</script>
+
 
 {% schema %}
   {
