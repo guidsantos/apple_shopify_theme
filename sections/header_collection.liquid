@@ -78,7 +78,7 @@
       <div class="section-header_collection-list-product" data-id="{{ block.settings.collection }}">
         {% for product in collections[block.settings.collection].products limit: 5 %}
           <div class="section-header_collection-list-product_card">
-            <img src="{{ product.url | img_url }}" alt="{{ product.featured_image.alt }}">
+            <img src="{{ product.images[0] | img_url }}" alt="{{ product.featured_image.alt }}">
             <a href="{{ product.url }}">{{ product.title }}</a>
           </div>
         {% endfor %}
