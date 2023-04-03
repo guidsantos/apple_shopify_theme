@@ -581,13 +581,13 @@
           "69968edc-99d2-48c2-b583-beb62306b344": {
             "type": "collections",
             "settings": {
-              "collection": ""
+              "collection": "celular"
             }
           },
           "929a7ace-74f2-45e4-967b-24d0cf88fa98": {
             "type": "collections",
             "settings": {
-              "collection": ""
+              "collection": "smart-watch"
             }
           }
         },
@@ -596,7 +596,7 @@
           "929a7ace-74f2-45e4-967b-24d0cf88fa98"
         ],
         "custom_css": [
-          "* {font-color: black}"
+          "{font-color: #000;}"
         ],
         "settings": {
           "title": "Header Collection"
