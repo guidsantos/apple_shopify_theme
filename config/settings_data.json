@@ -238,27 +238,9 @@
     "sections": {
       "header": {
         "type": "header",
-        "blocks": {
-          "887967db-9ae8-41de-9a2f-11df69f27f55": {
-            "type": "collections",
-            "settings": {
-              "collection": "celular"
-            }
-          },
-          "b9c10db4-fa99-49ae-a480-8ee1877f99fb": {
-            "type": "collections",
-            "settings": {
-              "collection": "smart-watch"
-            }
-          }
-        },
-        "block_order": [
-          "887967db-9ae8-41de-9a2f-11df69f27f55",
-          "b9c10db4-fa99-49ae-a480-8ee1877f99fb"
-        ],
         "settings": {
           "remove_space": true,
-          "align_logo": "left",
+          "align_logo": "center",
           "desktop_logo_size": "100%",
           "mobile_logo_size": "100%",
           "main_linklist": "main-menu",
@@ -592,9 +574,37 @@
           "transparent_btn": true,
           "mobile_grid": "on_mobile_set_row_two"
         }
+      },
+      "0b0585f3-e816-4664-b083-fd97b93add7d": {
+        "type": "header_collection",
+        "blocks": {
+          "69968edc-99d2-48c2-b583-beb62306b344": {
+            "type": "collections",
+            "settings": {
+              "collection": ""
+            }
+          },
+          "929a7ace-74f2-45e4-967b-24d0cf88fa98": {
+            "type": "collections",
+            "settings": {
+              "collection": ""
+            }
+          }
+        },
+        "block_order": [
+          "69968edc-99d2-48c2-b583-beb62306b344",
+          "929a7ace-74f2-45e4-967b-24d0cf88fa98"
+        ],
+        "custom_css": [
+          "* {font-color: black}"
+        ],
+        "settings": {
+          "title": "Header Collection"
+        }
       }
     },
     "content_for_index": [
+      "0b0585f3-e816-4664-b083-fd97b93add7d",
       "1573520799384",
       "1557953325140",
       "1577034702140",
